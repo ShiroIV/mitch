@@ -1,4 +1,30 @@
-{
+package garden.appl.mitch.client
+
+import android.content.Context
+import android.graphics.Color
+import android.net.Uri
+import android.util.Log
+import androidx.core.graphics.ColorUtils
+import androidx.core.net.toUri
+import garden.appl.mitch.ItchWebsiteUtils
+import garden.appl.mitch.Mitch
+import garden.appl.mitch.R
+import garden.appl.mitch.Utils
+import garden.appl.mitch.client.ItchWebsiteParser.getPurchasedInfo
+import garden.appl.mitch.database.game.Game
+import garden.appl.mitch.database.installation.Installation
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.FormBody
+import okhttp3.Request
+import org.json.JSONObject
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
+import java.io.IOException
+import java.util.Collections
+
+object ItchWebsiteParser {
     private val regexForTerribleUniversalCurrencyParsing = Regex("""\D+""")
 
     class UploadNotFoundException(uploadId: Int) : RuntimeException(uploadId.toString())
